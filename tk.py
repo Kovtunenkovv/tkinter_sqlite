@@ -7,7 +7,7 @@ import datetime
 
 
 def clicked():  
-    button.configure(text="обновление")
+    button.configure(text="update")
     all_data =[]
     with sqlite3.connect('9-3.db') as db:
         cursor=db.cursor()
@@ -29,13 +29,13 @@ frame_up.pack(side='top',fill='both',expand=True)
 frame_down.pack(side='bottom', fill='both', expand=True)
 
 l_zip_text=tk.Label(frame_up, text = 'Rigion')
-l_zip_search=tk.Entry(frame_up)                                 #Вставить в запрос, если пусто = *
+l_zip_search=tk.Entry(frame_up)                                         #Вставить в запрос, если пусто = *
 l_hostname_text=tk.Label(frame_up, text = 'BS')
-l_hostname_search=tk.Entry(frame_up)                            #Вставить в запрос, если пусто = *
+l_hostname_search=tk.Entry(frame_up)                                    #Вставить в запрос, если пусто = *
 l_firstoccurrence_text=tk.Label(frame_up, text = 'Date')
-l_firstoccurrence_search=tk.Entry(frame_up)                                #Вставить в запрос, если пусто = *
+l_firstoccurrence_search=tk.Entry(frame_up)                             #Вставить в запрос, если пусто = *
 l_eventid_text=tk.Label(frame_up, text = 'Alarm')
-l_eventis_search=tk.Entry(frame_up)                             #Вставить в запрос, если пусто = *
+l_eventis_search=tk.Entry(frame_up)                                     #Вставить в запрос, если пусто = *
 
 l_zip_text.grid(row="0",column="0",padx=10,pady=10)
 l_zip_search.grid(row="0",column="1",padx=10,pady=10)
@@ -47,11 +47,11 @@ l_eventid_text.grid(row="3",column="0",padx=10,pady=10)
 l_eventis_search.grid(row="3",column="1",padx=10,pady=10)
 
 table = ttk.Treeview(frame_down)
-table['columns'] = [0,1,2,3,4,5,6,7,8]                          #Необходимо подогнать ширину каждого столбца под длину строчки
+table['columns'] = [0,1,2,3,4,5,6,7,8]                                  #Необходимо подогнать ширину каждого столбца под длину строчки
 all_data =[]
 with sqlite3.connect('9-3.db') as db:
     cursor=db.cursor()
-    query = """SELECT * FROM alarm_daily limit 10"""            #where zip = '...' and hostname = '...' and firstoccurrence like '...%' and eventid = '...'
+    query = """SELECT * FROM alarm_daily limit 10"""                    #where zip = '...' and hostname = '...' and firstoccurrence like '...%' and eventid = '...'
     cursor.execute(query)
     all_data=cursor.fetchall()
 
