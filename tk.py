@@ -5,7 +5,6 @@ from tkinter import *
 import sqlite3
 import datetime
 
-
 def clicked():  
     button.configure(text="update")
     all_data =[]
@@ -50,6 +49,7 @@ table = ttk.Treeview(frame_down)
 heads =['id','zip','site','hostname','first','end','severity','eventid','info']
 table['columns'] = heads                                 #Необходимо подогнать ширину каждого столбца под длину строчки
 all_data =[]
+
 with sqlite3.connect('9-3.db') as db:
     cursor=db.cursor()
     query = """SELECT * FROM alarm_daily limit 10"""                    #where zip = '...' and hostname = '...' and firstoccurrence like '...%' and eventid = '...'
@@ -59,7 +59,11 @@ with sqlite3.connect('9-3.db') as db:
 for header in heads:
     table.heading(header,text=header,anchor='center')
     table.column(header,anchor='center')
-  
+
+scroll=ttk.Scrollbar(frame_down, command=table.yview)
+table.configure(yscrollcommand=scroll.set)
+scroll.pack(side=tk.RIGHT, fill=tk.Y)
+
 for row in all_data:
     table.insert('',tk.END,values=row)
 
