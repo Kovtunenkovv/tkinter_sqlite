@@ -47,7 +47,8 @@ l_eventid_text.grid(row="3",column="0",padx=10,pady=10)
 l_eventis_search.grid(row="3",column="1",padx=10,pady=10)
 
 table = ttk.Treeview(frame_down)
-table['columns'] = [0,1,2,3,4,5,6,7,8]                                  #Необходимо подогнать ширину каждого столбца под длину строчки
+heads =['id','zip','site','hostname','first','end','severity','eventid','info']
+table['columns'] = heads                                 #Необходимо подогнать ширину каждого столбца под длину строчки
 all_data =[]
 with sqlite3.connect('9-3.db') as db:
     cursor=db.cursor()
@@ -55,6 +56,10 @@ with sqlite3.connect('9-3.db') as db:
     cursor.execute(query)
     all_data=cursor.fetchall()
 
+for header in heads:
+    table.heading(header,text=header,anchor='center')
+    table.column(header,anchor='center')
+  
 for row in all_data:
     table.insert('',tk.END,values=row)
 
