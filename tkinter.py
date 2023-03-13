@@ -28,13 +28,13 @@ frame_up.pack(side='top',fill='both',expand=True)
 frame_down.pack(side='bottom', fill='both', expand=True)
 
 l_zip_text=tk.Label(frame_up, text = 'Регион')
-l_zip_search=tk.Label(frame_up,text = 'поиск') ###
+l_zip_search=tk.Label(frame_up) #search
 l_hostname_text=tk.Label(frame_up, text = 'БС')
-l_hostname_search=tk.Label(frame_up,text = 'поиск') ###
+l_hostname_search=tk.Label(frame_up) #search
 l_date_text=tk.Label(frame_up, text = 'Дата')
-l_date_search=tk.Label(frame_up,text = 'поиск') ###
+l_date_search=tk.Label(frame_up) #search
 l_eventid_text=tk.Label(frame_up, text = 'Авария')
-l_eventis_search=tk.Label(frame_up,text = 'поиск') ###
+l_eventis_search=tk.Label(frame_up) #search
 
 l_zip_text.grid(row="0",column="0",padx=10,pady=10)
 l_zip_search.grid(row="0",column="1",padx=10,pady=10)
