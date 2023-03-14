@@ -50,6 +50,15 @@ heads =['id','zip','site','hostname','first','end','severity','eventid','info']
 table['columns'] = heads                                 #Необходимо подогнать ширину каждого столбца под длину строчки
 all_data =[]
 
+table.column("#1",width=50)
+table.column("#2",width=70)
+table.column("#3",width=100)
+table.column("#4",width=100)
+table.column("#5",width=150)
+table.column("#6",width=150)
+table.column("#7",width=50)
+table.column("#8",width=150)
+
 with sqlite3.connect('9-3.db') as db:
     cursor=db.cursor()
     query = """SELECT * FROM alarm_daily limit 10"""                    #where zip = '...' and hostname = '...' and firstoccurrence like '...%' and eventid = '...'
