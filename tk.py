@@ -5,16 +5,6 @@ from tkinter import *
 import sqlite3
 import datetime
 
-def clicked():  
-    button.configure(text="update")
-    all_data =[]
-    with sqlite3.connect('9-3.db') as db:
-        cursor=db.cursor()
-        query = """SELECT * FROM alarm_daily limit 50"""
-        cursor.execute(query)
-        all_data=cursor
-    #return all_data
-
 window = tk.Tk()
 window.title("Daily blinking")
 window.geometry('1280x800')
@@ -47,7 +37,7 @@ l_eventis_search.grid(row="3",column="1",padx=10,pady=10)
 
 table = ttk.Treeview(frame_down)
 heads =['id','zip','site','hostname','first','end','severity','eventid','info']
-table['columns'] = heads                                 #Необходимо подогнать ширину каждого столбца под длину строчки
+table['columns'] = heads
 all_data =[]
 
 table.column("#1",width=50)
@@ -89,5 +79,15 @@ def search(l_zip_search="", l_hostname_search="", l_firstoccurrence_search="", l
     rows = trans.fetchall()
     trans.disconnect()
     return rows
+
+def clicked():  
+    button.configure(text="update")
+    all_data =[]
+    with sqlite3.connect('9-3.db') as db:
+        cursor=db.cursor()
+        query = """SELECT * FROM alarm_daily limit 50"""
+        cursor.execute(query)
+        all_data=cursor
+    #return all_data
 
 window.mainloop() #Эта функция вызывает бесконечный цикл окна
