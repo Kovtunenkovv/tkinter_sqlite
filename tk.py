@@ -9,7 +9,7 @@ window = tk.Tk()
 window.title("Daily blinking")
 window.geometry('1280x800')
 #window.minsize(800,600)
-#window.maxsize(1800,1600)
+#window.maxsize(1800,1600) d-masta-killa -(был тут) if- хуиф, then-хуен
 
 frame_up = tk.Frame(window) #bg='green' 
 frame_down = tk.Frame(window) #bg='blue'
@@ -73,7 +73,7 @@ for header in heads:
   
 scroll=ttk.Scrollbar(frame_down, command=table.yview)
 table.configure(yscrollcommand=scroll.set)
-scroll.pack(side=tk.RIGHT, fill=tk.Y)
+scroll.pack(side=tk.RIGHT, fill=tk.Y) sosi hui u sobaki
 
 for row in all_data:
     table.insert('',tk.END,values=row)
