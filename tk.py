@@ -71,7 +71,9 @@ table.column("#6",width=150)
 table.column("#7",width=50)
 table.column("#8",width=150)
 
-with sqlite3.connect('9-3.db') as db:
+with sqlite3.connect('9-3.db') as db: #9-3.db
+    #9-3.db
+    #L:\\technical\\Эксплуатация_БС_UMTS\\Регламент_эксплуатация\\Распределение по группам\\Зона 3\\ЗИП\\!Ковтуненко\\py\\2023.db
     cursor=db.cursor()
     query ="""select * from alarm_daily limit 50"""                   
     cursor.execute(query)
@@ -101,7 +103,9 @@ def clicked_def():
     for item in table.get_children():
         table.delete(item)
 
-    with sqlite3.connect('9-3.db') as db:
+    with sqlite3.connect('9-3.db') as db: 
+        #9-3.db
+        #L:\\technical\\Эксплуатация_БС_UMTS\\Регламент_эксплуатация\\Распределение по группам\\Зона 3\\ЗИП\\!Ковтуненко\\py\\2023.db
         cursor=db.cursor()
         query = """SELECT * FROM alarm_daily where zip = "{}" AND hostname = "{}" AND firstoccurrence LIKE "{}%" """.format(zip, hostname, firstoccurrence)
         cursor.execute(query)
