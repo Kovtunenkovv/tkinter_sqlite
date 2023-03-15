@@ -44,6 +44,19 @@ l_eventis_search.grid(row="3",column="1",padx=10,pady=10)
 l_limit_text.grid(row="4",column="0",padx=10,pady=10)
 l_limit_search.grid(row="4",column="1",padx=10,pady=10)
 
+l_comment1_text=tk.Label(frame_up, text = '#SEA')
+l_comment1_text.grid(row="0",column="3",padx=10,pady=10)
+l_comment2_text=tk.Label(frame_up, text = '#MO1111')
+l_comment2_text.grid(row="1",column="3",padx=10,pady=10)
+l_comment3_text=tk.Label(frame_up, text = '#YYYY-MM-DD')
+l_comment3_text.grid(row="2",column="3",padx=10,pady=10)
+l_comment4_text=tk.Label(frame_up, text = '#dont use')
+l_comment4_text.grid(row="3",column="3",padx=10,pady=10)
+l_comment4_text=tk.Label(frame_up, text = '#dont use')
+l_comment4_text.grid(row="4",column="3",padx=10,pady=10)
+
+
+
 table = ttk.Treeview(frame_down, show='headings')
 heads =['id','zip','site','hostname','first','end','severity','eventid','info']
 table['columns'] = heads
@@ -60,10 +73,7 @@ table.column("#8",width=150)
 
 with sqlite3.connect('9-3.db') as db:
     cursor=db.cursor()
-    query ="""select * from alarm_daily limit 50"""
-            #"""SELECT * FROM alarm_daily WHERE zip=? and hostname=? and firstoccurrence like=?% and eventid=? limit=?, 
-            #(l_zip_search,l_hostname_search,l_firstoccurrence_search, l_eventis_search, l_limit_search)"""                    
-    
+    query ="""select * from alarm_daily limit 50"""                   
     cursor.execute(query)
     all_data=cursor.fetchall()
 
@@ -80,31 +90,34 @@ for row in all_data:
 
 table.pack(expand=tk.YES, fill='both')
 
-def clicked_def(): 
-    template = "SELECT * FROM alarm_daily {WHERE} {PARAM}"                  ###
+def clicked_def():
+    zip = l_zip_search.get()
+    hostname = l_hostname_search.get()
+    firstoccurrence = l_firstoccurrence_search.get()
+    #eventid = l_eventis_search.get()
+    #limit = l_limit_search.get()
     button.configure(text="update")
-    with sqlite3.connect('9-3.db') as db:
-        cursor=db.cursor()
-        query = """SELECT * FROM alarm_daily where zip = 'SEA' limit 50"""
-        cursor.execute(query)
-        all_data=cursor
         
     for item in table.get_children():
-        print(item)
         table.delete(item)
+
+    with sqlite3.connect('9-3.db') as db:
+        cursor=db.cursor()
+        query = """SELECT * FROM alarm_daily where zip = "{}" AND hostname = "{}" AND firstoccurrence LIKE "{}%" """.format(zip, hostname, firstoccurrence)
+        cursor.execute(query)
+        all_data=cursor.fetchall()
 
     for row in all_data:
         table.insert('',tk.END,values=row)
 
     table.update()
-    window.update()
-        
+    window.update()    
     button.configure(text="Enter data")
 
-    #return all_data
+    return all_data
 
 # Button
 button = tk.Button(frame_up, text="Enter data", command=clicked_def)
 button.grid(row=5, column=0, padx=50, pady=10)
 
-window.mainloop() #Эта функция вызывает бесконечный цикл окна
+window.mainloop()
