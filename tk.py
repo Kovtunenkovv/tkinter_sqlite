@@ -22,16 +22,17 @@ regions = ('CNT','NEA','NWS','SEA','SWS')
 
 l_zip_text=tk.Label(frame_up, text = 'Rigion')
 l_zip_search=ttk.Combobox(frame_up, values=regions)
-l_zip_search.get()
 l_hostname_text=tk.Label(frame_up, text = 'BS')
 l_hostname_search=tk.Entry(frame_up)                                    
-l_hostname_search.get()
 l_firstoccurrence_text=tk.Label(frame_up, text = 'Date')
 l_firstoccurrence_search=DateEntry(frame_up, date_pattern='YYYY-mm-dd', foreground ='black', 
                                     normalforeground = 'black', selectforeground='red', background = 'white')
-l_firstoccurrence_search.get()
 l_enddate_search=DateEntry(frame_up, date_pattern='YYYY-mm-dd', foreground ='black', 
                                     normalforeground = 'black', selectforeground='red', background = 'white')
+
+l_zip_search.get()
+l_hostname_search.get()
+l_firstoccurrence_search.get()
 l_enddate_search.get()
 
 l_zip_text.grid(row="0",column="1",padx=10,pady=10)
@@ -42,26 +43,23 @@ l_firstoccurrence_text.grid(row="0",column="5",padx=10,pady=10)
 l_firstoccurrence_search.grid(row="0",column="6",padx=10,pady=10)
 l_enddate_search.grid(row="0",column="7",padx=10,pady=10)
 
-
-table = ttk.Treeview(frame_down, show='headings')
-heads =['id','zip','site','hostname','first','end','severity','eventid','info']
+table = ttk.Treeview(frame_down, show='headings', columns=('#1', '#2', '#3', '#4', '#5','#6'))
+heads =['zip','hostname','first','end','eventid','info']
 table['columns'] = heads
-all_data =[]
 
-table.column("#1",width=20)
-table.column("#2",width=20)
-table.column("#3",width=90)
-table.column("#4",width=50)
-table.column("#5",width=130)
-table.column("#6",width=130)
-table.column("#7",width=50)
-table.column("#8",width=130)
+table.column("#1",minwidth=45, width=60, stretch='no')
+table.column("#2",minwidth=60, width=70, stretch='no')
+table.column("#3",minwidth=40, width=150, stretch='no')
+table.column("#4",minwidth=40, width=150, stretch='no')
+table.column("#5",minwidth=40, width=160, stretch='no')
+table.column("#6",minwidth=40, width=1100, stretch='no')
+all_data =[]
 
 with sqlite3.connect('9-3.db') as db: #9-3.db
     #9-3.db
     #L:\\technical\\Эксплуатация_БС_UMTS\\Регламент_эксплуатация\\Распределение по группам\\Зона 3\\ЗИП\\!Ковтуненко\\py\\2023.db
     cursor=db.cursor()
-    query ="""select * from alarm_daily limit 50"""                   
+    query ="""select zip,hostname,firstoccurrence,enddate,eventid,additionalinfo1 from alarm_daily limit 50"""                   
     cursor.execute(query)
     all_data=cursor.fetchall()
 
@@ -73,9 +71,12 @@ scroll=ttk.Scrollbar(frame_down, command=table.yview)
 table.configure(yscrollcommand=scroll.set)
 scroll.pack(side=tk.RIGHT, fill=tk.Y)
 
+scroll=ttk.Scrollbar(frame_down, command=table.yview)
+table.configure(yscrollcommand=scroll.set)
+scroll.pack(side=tk.BOTTOM, fill=tk.X)
+
 for row in all_data:
     table.insert('',tk.END,values=row)
-
 table.pack(expand=tk.YES, fill='both')
 
 def clicked_def():
@@ -94,7 +95,7 @@ def clicked_def():
         #9-3.db
         #L:\\technical\\Эксплуатация_БС_UMTS\\Регламент_эксплуатация\\Распределение по группам\\Зона 3\\ЗИП\\!Ковтуненко\\py\\2023.db
         cursor=db.cursor()
-        query = """SELECT * FROM alarm_daily where zip = '{}' AND hostname LIKE '{}%' AND firstoccurrence BETWEEN '{}%' AND '{}%' """.format(zip, hostname, firstoccurrence, enddate)
+        query = """SELECT zip,hostname,firstoccurrence,enddate,eventid,additionalinfo1 FROM alarm_daily where zip = '{}' AND hostname LIKE '{}%' AND firstoccurrence BETWEEN '{}%' AND '{}%' """.format(zip, hostname, firstoccurrence, enddate)
         cursor.execute(query)
         all_data=cursor.fetchall()
 
