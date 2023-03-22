@@ -72,8 +72,8 @@ scroll=ttk.Scrollbar(frame_down, command=table.yview)
 table.configure(yscrollcommand=scroll.set)
 scroll.pack(side=tk.RIGHT, fill=tk.Y)
 
-scroll=ttk.Scrollbar(frame_down, command=table.yview)
-table.configure(yscrollcommand=scroll.set)
+scroll=ttk.Scrollbar(frame_down, command=table.xview, orient='horizontal')
+table.configure(xscrollcommand=scroll.set)
 scroll.pack(side=tk.BOTTOM, fill=tk.X)
 
 for row in all_data:
