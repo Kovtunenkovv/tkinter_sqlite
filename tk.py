@@ -5,6 +5,7 @@ from tkinter import *
 from tkcalendar import DateEntry, Calendar 
 import sqlite3
 import datetime
+from flask_babel import Babel
 
 window = tk.Tk()
 window.title("Daily blinking")
@@ -55,7 +56,7 @@ table.column("#5",minwidth=40, width=160, stretch='no')
 table.column("#6",minwidth=40, width=1100, stretch='no')
 all_data =[]
 
-with sqlite3.connect('9-3.db') as db: #9-3.db
+with sqlite3.connect('2023.db') as db: #9-3.db
     #9-3.db
     #L:\\technical\\Эксплуатация_БС_UMTS\\Регламент_эксплуатация\\Распределение по группам\\Зона 3\\ЗИП\\!Ковтуненко\\py\\2023.db
     cursor=db.cursor()
@@ -91,7 +92,7 @@ def clicked_def():
     for item in table.get_children():
         table.delete(item)
 
-    with sqlite3.connect('9-3.db') as db: 
+    with sqlite3.connect('2023.db') as db: 
         #9-3.db
         #L:\\technical\\Эксплуатация_БС_UMTS\\Регламент_эксплуатация\\Распределение по группам\\Зона 3\\ЗИП\\!Ковтуненко\\py\\2023.db
         cursor=db.cursor()
