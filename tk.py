@@ -56,9 +56,7 @@ table.column("#5",minwidth=40, width=160, stretch='no')
 table.column("#6",minwidth=40, width=1100, stretch='no')
 all_data =[]
 
-with sqlite3.connect('2023.db') as db: #9-3.db
-    #9-3.db
-    #L:\\technical\\Эксплуатация_БС_UMTS\\Регламент_эксплуатация\\Распределение по группам\\Зона 3\\ЗИП\\!Ковтуненко\\py\\2023.db
+with sqlite3.connect('2023.db') as db:
     cursor=db.cursor()
     query ="""select zip,hostname,firstoccurrence,enddate,eventid,additionalinfo1 from alarm_daily limit 50"""                   
     cursor.execute(query)
@@ -93,8 +91,6 @@ def clicked_def():
         table.delete(item)
 
     with sqlite3.connect('2023.db') as db: 
-        #9-3.db
-        #L:\\technical\\Эксплуатация_БС_UMTS\\Регламент_эксплуатация\\Распределение по группам\\Зона 3\\ЗИП\\!Ковтуненко\\py\\2023.db
         cursor=db.cursor()
         query = """SELECT zip,hostname,firstoccurrence,enddate,eventid,additionalinfo1 FROM alarm_daily where zip = '{}' AND hostname LIKE '{}%' AND firstoccurrence BETWEEN '{}%' AND '{}%' """.format(zip, hostname, firstoccurrence, enddate)
         cursor.execute(query)
@@ -109,7 +105,6 @@ def clicked_def():
     print(zip, hostname, firstoccurrence, enddate)
     return all_data
 
-# Button
 button = tk.Button(frame_up, text="Enter data", command=clicked_def)
 button.grid(row=0, column=8, padx=100, pady=5)
 
