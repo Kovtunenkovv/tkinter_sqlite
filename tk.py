@@ -94,7 +94,10 @@ def clicked_def():
     with sqlite3.connect('L:\\technical\\Эксплуатация_БС_UMTS\\Регламент_эксплуатация\\Распределение по группам\\Зона 
 3\\ЗИП\\!Ковтуненко\\py\\2023.db') as db: 
         cursor=db.cursor()
-        query = """SELECT zip,hostname,firstoccurrence,enddate,eventid,additionalinfo1 FROM alarm_daily where zip = '{}' AND hostname LIKE '{}%' AND firstoccurrence BETWEEN '{}%' AND '{}%' """.format(zip, hostname, firstoccurrence, enddate)
+        if firstoccurrence == enddate:
+                         query = """SELECT zip,hostname,firstoccurrence,enddate,eventid,additionalinfo1 FROM alarm_daily where zip = '{}' AND hostname LIKE '{}%' AND firstoccurrence LIKE '{}%' """.format(zip, hostname, firstoccurrence) 
+        else:
+                         query = """SELECT zip,hostname,firstoccurrence,enddate,eventid,additionalinfo1 FROM alarm_daily where zip = '{}' AND hostname LIKE '{}%' AND firstoccurrence BETWEEN '{}%' AND '{}%' """.format(zip, hostname, firstoccurrence, enddate)
         cursor.execute(query)
         all_data=cursor.fetchall()
 
