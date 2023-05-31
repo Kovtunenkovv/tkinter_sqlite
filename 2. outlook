@@ -1,0 +1,41 @@
+from exchangelib import Credentials, Account, Configuration, DELEGATE, FileAttachment, ItemAttachment, Message
+import os.path
+import datetime
+
+
+credentials = Credentials(username='***', password='***')
+
+config = Configuration(server='***', credentials=credentials)
+
+account = Account(primary_smtp_address='vitaly.kovtunenko@tele2.ru', config=config, autodiscover=False, access_type=DELEGATE)
+
+path = "L:\\technical\\Эксплуатация_БС_UMTS\\Регламент_эксплуатация\\Распределение по группам\\Зона 3\\ЗИП\\!Ковтуненко\\Alarms Ericsson daily MOS 2023"   #путь до сохранения
+
+itemout = None
+
+nowdate = datetime.datetime.now()
+
+for item in account.inbox.children: 
+    if item.name == "Alarms Ericsson daily MOS":                                                                                        #путь в почте
+        itemout = item
+
+
+if itemout != None:
+    for item in itemout.all().filter(subject__contains='Alarms Ericsson daily MOS')[:3]:                                               #сколько последних вложений проверяем
+        for attachment in item.attachments:
+            date_str = str(item.datetime_sent)
+            date = datetime.datetime.strptime(date_str[:19], "%Y-%m-%d %H:%M:%S")
+            print("текущая дата: " + nowdate.strftime("%Y%m%d"))
+            print("дата отправки: " + date.strftime("%Y%m%d"))
+            
+            if nowdate.strftime("%Y%m%d") == date.strftime("%Y%m%d"):
+                nowdate = date - datetime.timedelta(days=1)
+                date = (date - datetime.timedelta(days=1)).strftime("%Y%m%d")
+                
+                print("вложение: " + attachment.name)
+                print("название файла: " + date)
+                print(" ")
+                local_path = os.path.join(path, date + ".xlsx")
+                with open(local_path, 'wb') as f:
+                    f.write(attachment.content)
+          
