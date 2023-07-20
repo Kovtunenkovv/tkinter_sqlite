@@ -6,3 +6,10 @@ select hostname,e1,time1,e2,min(time2) as time2 from
 	(select temp1.id, temp1.hostname,temp1.firstoccurrence as time1,temp1.eventid as e1,temp2.id,temp2.firstoccurrence as time2,temp2.eventid as e2,temp2.additionalinfo1
 	from temp1 left JOIN temp2 on temp1.hostname = temp2.hostname and temp2.firstoccurrence BETWEEN temp1.firstoccurrence and temp1.enddate) as t
 group by t.id
+
+
+________________________
+select hostname,e1,time1,e2,time2, substr(substr(additionalinfo1,-4,4),2,2) as cell from
+	(select temp1.id, temp1.hostname,temp1.firstoccurrence as time1,temp1.eventid as e1,temp2.id,temp2.firstoccurrence as time2,temp2.eventid as e2,temp2.additionalinfo1
+	from temp1 left JOIN temp2 on temp1.hostname = temp2.hostname and temp2.firstoccurrence BETWEEN temp1.firstoccurrence and temp1.enddate) as t
+group by time2
