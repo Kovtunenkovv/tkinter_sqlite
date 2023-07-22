@@ -2,8 +2,8 @@ CREATE TEMPORARY TABLE temp1 as select * from alarm_daily where zip = "SEA" AND 
 firstoccurrence like "2023-07-17%" or 
 firstoccurrence like "2023-07-18%" or 
 firstoccurrence like "2023-07-19%" or 
-firstoccurrence like "2023-07-20%") or 
-firstoccurrence like "2023-07-21%") or 
+firstoccurrence like "2023-07-20%" or 
+firstoccurrence like "2023-07-21%" or 
 firstoccurrence like "2023-07-22%")
 ;
 
@@ -11,8 +11,8 @@ CREATE TEMPORARY TABLE temp2 as select * from alarm_daily where zip = "SEA" AND 
 firstoccurrence like "2023-07-17%" or 
 firstoccurrence like "2023-07-18%" or 
 firstoccurrence like "2023-07-19%" or 
-firstoccurrence like "2023-07-20%") or
-firstoccurrence like "2023-07-21%") or
+firstoccurrence like "2023-07-20%" or
+firstoccurrence like "2023-07-21%" or
 firstoccurrence like "2023-07-22%")
 ;
 
