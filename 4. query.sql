@@ -23,5 +23,5 @@ select hostname,e1,MAX(time1) as maxtime,e2,time2, ((Cast((JulianDay((time2)) - 
 from (select hostname,e1,time1 as time1,e2,time2,additionalinfo1 
 from (select temp1.id,temp1.hostname,temp1.firstoccurrence as time1,temp1.eventid as e1,temp2.id,temp2.firstoccurrence as time2,temp2.eventid as e2,temp2.additionalinfo1
 from temp1 left JOIN temp2	on temp1.hostname = temp2.hostname and temp2.firstoccurrence BETWEEN temp1.firstoccurrence and temp1.enddate) as t) as t2
-where e2 is not null
+where e2 is not null and cell != "05"
 group by hostname, cell
