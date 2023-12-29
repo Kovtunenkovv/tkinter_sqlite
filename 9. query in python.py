@@ -52,7 +52,7 @@ group by hostname, cell, time1;'''
         print(' ')    
         print('________________________________________________________________________')
 
-    input('Press inter for exit\n')
+    input('Press enter for exit\n')
     db_cursor.close()
 
 except sqlite3.Error as error:
