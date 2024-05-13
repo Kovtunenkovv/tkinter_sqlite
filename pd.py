@@ -9,10 +9,6 @@ dirls = os.listdir(link)
 
 print(*dirls, sep = '\n')
 
-lst = pd.read_csv(newfile, delimiter=',', header=None, low_memory=False)
-lst = lst.iloc[:,[3]]  
-lst = lst.drop_duplicates() 
-
 for file in dirls:
     print(file + ' - open file')
     path = link + file
@@ -26,6 +22,5 @@ for file in dirls:
     count = count + 1
     print('Read', count, 'files')
     df.to_csv(newfile, mode='a', index= False , header= False )
-    lst = lst + file 
 
 print('Script is finished, read ', count, ' files')
