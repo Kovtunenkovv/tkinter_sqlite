@@ -5,6 +5,7 @@ from tkinter import *
 from tkcalendar import DateEntry, Calendar 
 import sqlite3
 from datetime import date, datetime, timedelta
+import datetime
 from flask_babel import Babel
 
 window = tk.Tk()
@@ -12,6 +13,10 @@ window.title("Daily blinking")
 window.geometry('1280x800') #root.attributes('-fullscreen', True) 
 #window.minsize(800,600)
 #window.maxsize(1800,1600)
+
+data_name = datetime.datetime.today()
+data_name = data_name.strftime("%Y")
+path = 'C:\\Users\\Public\\' + data_name + '.db'
 
 frame_up = tk.Frame(window, width=1280, height=100) #bg='green' 
 frame_down = tk.Frame(window) #bg='blue'
@@ -56,8 +61,7 @@ table.column("#5",minwidth=40, width=160, stretch='no')
 table.column("#6",minwidth=40, width=1100, stretch='no')
 all_data =[]
 
-with sqlite3.connect('L:\\technical\\Эксплуатация_БС_UMTS\\Регламент_эксплуатация\\Распределение по группам\\Зона 
-3\\ЗИП\\!Ковтуненко\\py\\2023.db') as db:
+with sqlite3.connect(path) as db:
     cursor=db.cursor()
     query ="""select zip,hostname,firstoccurrence,enddate,eventid,additionalinfo1 from alarm_daily limit 50"""                   
     cursor.execute(query)
@@ -91,8 +95,7 @@ def clicked_def():
     for item in table.get_children():
         table.delete(item)
 
-    with sqlite3.connect('L:\\technical\\Эксплуатация_БС_UMTS\\Регламент_эксплуатация\\Распределение по группам\\Зона 
-3\\ЗИП\\!Ковтуненко\\py\\2023.db') as db: 
+    with sqlite3.connect(path) as db: 
         cursor=db.cursor()
         if firstoccurrence == enddate:
                          query = """SELECT zip,hostname,firstoccurrence,enddate,eventid,additionalinfo1 FROM alarm_daily where zip = '{}' AND hostname LIKE '{}%' AND firstoccurrence LIKE '{}%' """.format(zip, hostname, firstoccurrence) 
