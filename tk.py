@@ -24,7 +24,7 @@ frame_down = tk.Frame(window) #bg='blue'
 frame_up.pack() #side='top',fill='both',expand=True
 frame_down.pack(side='bottom', fill='both', expand=True)
 
-regions = ('CNT','NEA','NWS','SEA','SWS')
+regions = ('CNT','NEA','NWS','SEA','SWS', 'BS not use')
 
 l_zip_text=tk.Label(frame_up, text = 'Rigion')
 l_zip_search=ttk.Combobox(frame_up, values=regions)
@@ -112,7 +112,7 @@ def clicked_def():
     button.configure(text="Enter data")
     print(zip, hostname, firstoccurrence, enddate)
     return all_data
-
+root.blind_all("Enter", button)
 button = tk.Button(frame_up, text="Enter data", command=clicked_def)
 button.grid(row=0, column=8, padx=100, pady=5)
 
