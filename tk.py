@@ -112,7 +112,9 @@ def clicked_def():
     button.configure(text="Enter data")
     print(zip, hostname, firstoccurrence, enddate)
     return all_data
+  
 button = tk.Button(frame_up, text="Enter data", command=clicked_def)
 button.grid(row=0, column=8, padx=100, pady=5)
+window.bind("<Return>", lambda event: clicked_def())
 
 window.mainloop()
