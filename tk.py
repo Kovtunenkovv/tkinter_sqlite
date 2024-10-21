@@ -112,7 +112,6 @@ def clicked_def():
     button.configure(text="Enter data")
     print(zip, hostname, firstoccurrence, enddate)
     return all_data
-root.blind_all("Enter", button)
 button = tk.Button(frame_up, text="Enter data", command=clicked_def)
 button.grid(row=0, column=8, padx=100, pady=5)
 
