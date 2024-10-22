@@ -1,7 +1,0 @@
-import os
-import shutil
-
-print('Start copy 2023.db')
-shutil.copy(os.path.join('L:\\technical\\Эксплуатация_БС_UMTS\\Регламент_эксплуатация\\Распределение по группам\\Зона 3\\ЗИП\\!Ковтуненко\\py\\Daily', '2023.db'),
-            os.path.join('C:\\Users\\Public'))
-print('Copy is done')
