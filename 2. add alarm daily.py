@@ -2,11 +2,16 @@ import openpyxl
 import sqlite3
 import os
 import datetime
+from datetime import date, timedelta
+
+data_name = datetime.datetime.today() - timedelta(days=1)
+data_name = data_name.strftime("%Y")
+db_name = "L:\\technical\\Эксплуатация_БС_UMTS\\Регламент_эксплуатация\\Распределение по группам\\Зона 3\\ЗИП\\!Ковтуненко\\py\\Daily\\" + data_name + ".db"
 
 start_time = datetime.datetime.now()
 
 try:
-    db_connection = sqlite3.connect('2023.db')
+    db_connection = sqlite3.connect(db_name)
     sql_query = '''CREATE TABLE IF NOT EXISTS alarm_daily (
                                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                                 zip TEXT,
@@ -44,7 +49,7 @@ try:
     
     print(date_list)
 
-    path = "L:\\technical\\Эксплуатация_БС_UMTS\\Регламент_эксплуатация\\Распределение по группам\\Зона 3\\ЗИП\\!Ковтуненко\\Alarms Ericsson daily MOS 2023\\"
+    path = "L:\\technical\\Эксплуатация_БС_UMTS\\Регламент_эксплуатация\\Распределение по группам\\Зона 3\\ЗИП\\!Ковтуненко\\Alarms Ericsson daily MOS " + data_name + "\\"
     path_bs = "bs_reg.xlsx"
 
     dir_list = os.listdir(path)
