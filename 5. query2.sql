@@ -15,7 +15,9 @@ select p.zip, p.hostname, p.eventid ,p.firstoccurrence,p.enddate,((Cast((JulianD
 left join h on p.hostname = h.hostname and h.firstoccurrence BETWEEN p.firstoccurrence and p.enddate
 where h.firstoccurrence is not null
 
--------------------------------------------
+--------------------------------------
+Combine query:
+--------------------------------------
 SELECT hostname, e1, maxt, e2, time2, delta
 FROM (
     SELECT hostname, e1, time1 AS maxt, e2, time2, delta,
