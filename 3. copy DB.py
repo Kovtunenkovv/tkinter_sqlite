@@ -7,7 +7,7 @@ from datetime import date, timedelta
 data_name = datetime.datetime.today() - timedelta(days=1)
 data_name = data_name.strftime("%Y")
 fname = data_name + '.db'
-from_src = 'L:\\technical\\Эксплуатация_БС_UMTS\\Регламент_эксплуатация\\Распределение по группам\\Зона 3\\ЗИП\\!Ковтуненко\\py\\Daily'
+from_src = 'L:\\*'
 to_src = 'C:\\Users\\Public'
 
 print(f'Start copy {fname}')
