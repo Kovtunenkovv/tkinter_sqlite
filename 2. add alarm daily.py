@@ -10,7 +10,7 @@ import logging
 logging.basicConfig(filename='script.log', level=logging.ERROR)
 
 # Константы
-BASE_PATH = "L:\\technical\\Эксплуатация_БС_UMTS\\Регламент_эксплуатация\\Распределение по группам\\Зона 3\\ЗИП\\!Ковтуненко\\"
+BASE_PATH = "L:\\"
 data_name = datetime.datetime.today() - timedelta(days=1)
 data_name = data_name.strftime("%Y")
 DB_PATH = BASE_PATH + "py\\Daily\\" + data_name + ".db"
